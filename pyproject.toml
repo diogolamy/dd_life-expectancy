@@ -1,0 +1,28 @@
+[project]
+name = "life_expectancy"
+version = "0.1.0"
+description = "A cool package doing cool things."
+authors = [{name="Diogo Lamy", email="diogolamy1999@gmail.com"}]
+dependencies = [ "pandas"]
+
+readme = "README.md"
+requires-python = ">=3.7"
+
+# These are optional. For example we usually use a `dev` section for dev dependencies
+# like testing libraries. You final users won't need them, but you, as the developer,
+# might.
+[project.optional-dependencies]
+dev = ["pytest", "pylint", "pytest-cov"]
+
+# This bit is important. It tells Python how to build your project.
+# In this case, we're using setuptools, which is usually already
+# included in your Python installation.
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+# This is also important. It tells setuptools which packages to include.
+# If you don't add this, you won't be able to import your package, 
+# (`import my_cool_package`) even if you install it.
+[tool.setuptools]
+packages = ["life_expectancy"]
