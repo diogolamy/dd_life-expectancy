@@ -12,7 +12,7 @@ requires-python = ">=3.7"
 # like testing libraries. You final users won't need them, but you, as the developer,
 # might.
 [project.optional-dependencies]
-dev = ["pytest", "pylint", "pytest-cov"]
+dev = ["pytest", "pylint", "pytest-cov", "toml"]
 
 # This bit is important. It tells Python how to build your project.
 # In this case, we're using setuptools, which is usually already
