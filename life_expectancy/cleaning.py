@@ -95,8 +95,9 @@ def filter_rows(df: pd.DataFrame, column: str, value) -> pd.DataFrame:
 
 
 
-def save_dataframe(df: pd.DataFrame, filename: str) -> None:
-
+def save_dataframe(df: pd.DataFrame, filename) -> None:
+    filename = str(filename)
+    
     if filename.endswith('.csv'):
         df.to_csv(filename, index=False)
     elif filename.endswith('.xlsx'):
