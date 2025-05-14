@@ -7,8 +7,8 @@ from . import OUTPUT_DIR
 
 def test_clean_data(pt_life_expectancy_expected):
     """Run the `clean_data` function and compare the output to the expected output"""
-    clean_data(input_path="life_expectancy/data/eu_life_expectancy_raw.tsv", 
-               output_path=OUTPUT_DIR / "pt_life_expectancy.csv", 
+    clean_data(input_path="life_expectancy/data/eu_life_expectancy_raw.tsv",
+               output_path=OUTPUT_DIR / "pt_life_expectancy.csv",
                country="PT")
 
     pt_life_expectancy_actual = pd.read_csv(
