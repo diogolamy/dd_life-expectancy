@@ -1,7 +1,10 @@
 """Data cleaning life_expectancy"""
 
-import pandas as pd
+# Standard library
 import argparse
+# Third-party library
+import pandas as pd
+
 
 def load_data(path: str, delimiter: str = '\t') -> pd.DataFrame:
 
@@ -97,7 +100,7 @@ def filter_rows(df: pd.DataFrame, column: str, value) -> pd.DataFrame:
 
 def save_dataframe(df: pd.DataFrame, filename) -> None:
     filename = str(filename)
-    
+
     if filename.endswith('.csv'):
         df.to_csv(filename, index=False)
     elif filename.endswith('.xlsx'):
