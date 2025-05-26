@@ -7,6 +7,10 @@ import pandas as pd
 
 
 def load_data(path: str, delimiter: str = '\t') -> pd.DataFrame:
+    """
+    Loads a dataset based on file extension.
+    """
+
     loaders = {
         '.csv': lambda p: pd.read_csv(p, sep=','),
         '.tsv': lambda p: pd.read_csv(p, sep='\t'),
@@ -29,6 +33,9 @@ def split_columns(df: pd.DataFrame,
                   column: str,
                   delimiter: str = ',',
                   new_column_names: list[str] = None) -> pd.DataFrame:
+    """
+    Splits a column into multiple columns using a delimiter.
+    """
 
     splits = df[column].str.split(delimiter, expand=True)
     num_cols = splits.shape[1]
@@ -48,6 +55,10 @@ def split_columns(df: pd.DataFrame,
 
 def unpivot(df: pd.DataFrame, exclude_columns: list,
             identifier_col_name="identifier", value_col_name="value") -> pd.DataFrame:
+    """
+    Reshape the data by gathering multiple columns into key-value pairs, 
+    keeping certain columns fixed.
+    """
 
     value_columns = [col for col in df.columns if col not in exclude_columns]
 
@@ -61,6 +72,11 @@ def unpivot(df: pd.DataFrame, exclude_columns: list,
 
 
 def clean_numeric_column(df: pd.DataFrame, column: str) -> pd.DataFrame:
+    """
+    Remove common non-numeric symbols and extract numeric data, 
+    dropping invalid entries.
+    """
+
     df[column] = df[column].astype(str).str.strip()
 
     symbols_to_remove = ['$', ',', '%', '€', ':', 'kg', 'approx.', 'N/A', 'missing']
@@ -74,15 +90,27 @@ def clean_numeric_column(df: pd.DataFrame, column: str) -> pd.DataFrame:
 
 
 def convert_column_dtype(df, column_name, target_dtype):
+    """
+    Converts a DataFrame column to a specified data type.
+    """
+
     df[column_name] = df[column_name].astype(target_dtype)
     return df
 
 
 def filter_rows(df: pd.DataFrame, column: str, value) -> pd.DataFrame:
+    """
+    Filters rows where the column matches the specified value.
+    """
+
     return df[df[column] == value]
 
 
 def save_data(df: pd.DataFrame, filename) -> None:
+    """
+    Saves a DataFrame in the format inferred from the file extension.
+    """
+
     filename = str(filename)
 
     if filename.endswith('.csv'):
@@ -98,6 +126,11 @@ def save_data(df: pd.DataFrame, filename) -> None:
 
 
 def clean_data(df: pd.DataFrame, country: str = "PT") -> pd.DataFrame:
+    """
+    Clean dataframe based on life expectancy data format by splitting columns, 
+    reshaping, converting types, and filtering by country.
+    """
+
     id_columns = ['unit', 'sex', 'age', 'region']
 
     df = split_columns(df, column='unit,sex,age,geo\\time',
@@ -118,6 +151,11 @@ def clean_data(df: pd.DataFrame, country: str = "PT") -> pd.DataFrame:
 
 
 def main(args=None):
+    """
+    Main function for load, clean, and save the life expectancy data,
+    based on a specific country code.
+    """
+
     parser = argparse.ArgumentParser(description="Clean EU life expectancy data.")
     parser.add_argument("input_path", help="Path to input data file")
     parser.add_argument("output_path", help="Path to save cleaned data")
